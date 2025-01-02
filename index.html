@@ -4,18 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beauty Product</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <div class="icon">
-      <input type="text" id="search-bar" placeholder="Search for products...">
-      <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <i class="fa-regular fa-heart"></i>
-      <i class="fa-regular fa-comment"></i>
-    </div>
     <h1>Beauty Product</h1>
+
     <div class="navbar">
       <nav>
         <ul>
@@ -34,6 +32,13 @@
           </li>
         </ul>
       </nav>
+    </div>
+
+    <div class="icon">
+      <input type="text" id="search-bar" placeholder="Search for products...">
+      <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <i class="fa-regular fa-heart"></i>
+      <i class="fa-regular fa-comment"></i>
     </div>
   </header>
 
@@ -68,54 +73,85 @@
         </a>
       </div>
       </div>
-    <h3>New Products</h3>
+    <h3 class="new-product">New Products</h3>
     <div class="product-grid">
       <div class="product">
         <a href="nail.html">
         <img src="pic2.jpg" alt="Nail Polish" height="300" widht="300">
-        <p>Nail Polish<br><span>Rs. 400</span></p>
+        <div class="product-description">
+          <div class="product-name">Nail Polish</div>
+          <div class="product-price">Rs. 400</div>
+        </div>
+     
         </a>
       </div>
       <div class="product">
         <a href="makeup.html">
         <img src="pic3.jpg" alt="Foundation" height="300" widht="300">
-        <p>Foundation<br><span>Rs. 900</span></p>
+        <div class="product-description">
+          <div class="product-name">Foundation</div>
+          <div class="product-price">Rs. 900</div>
+        </div>
+       
         </a>
       </div>
       <div class="product">
         <a href="hair.html">
         <img src="pic4.jpg" alt="Comb" height="300" widht="300">
-        <p>Comb<br><span>Rs. 90</span></p>
+        <div class="product-description">
+          <div class="product-name">Comb</div>
+          <div class="product-price">Rs. 90</div>
+        </div>
+        
         </a>
       </div>
       <div class="product">
         <a href="makeup.html">
         <img src="pic5.jpg" alt="Face Wash" height="300" widht="300">
-        <p>Face Wash<br><span>Rs. 375</span></p>
+        <div class="product-description">
+          <div class="product-name">Face Wash</div>
+          <div class="product-price">Rs. 375</div>
+        </div>
+        
         </a>
       </div>
       <div class="product">
         <a href="makeup.html">
         <img src="pic6.jpg" alt="Sunscreen" height="300" widht="300">
-        <p>Sunscreen<br><span>Rs. 800</span></p>
+        <div class="product-description">
+          <div class="product-name">Sunscreen</div>
+          <div class="product-price">Rs. 800</div>
+        </div>
+       
         </a>
       </div>
       <div class="product">
         <a href="makeup.html">
         <img src="pic7.jpg" alt="Vaseline" height="300" widht="300">
-        <p>Vaseline<br><span>Rs. 120</span></p>
+        <div class="product-description">
+          <div class="product-name">Vaseline</div>
+          <div class="product-price">Rs. 120</div>
+        </div>
+    
         </a>
       </div>
       <div class="product">
         <a href="makeup.html">
         <img src="pic8.jpg" alt="Makeup Brush" height="300" widht="300">
-        <p>Makeup Brush<br><span>Rs. 220</span></p>
+        <div class="product-description">
+          <div class="product-name">Makeup Brush</div>
+          <div class="product-price">Rs. 220</div>
+        </div>
+
         </a>
       </div>
       <div class="product">
         <a href="nail.html">
         <img src="pic9.jpg" alt="Nail Polish Set" height="300" widht="300">
-        <p>Nail Polish<br><span>Rs. 500</span></p>
+        <div class="product-description">
+          <div class="product-name">Nail Polish</div>
+          <div class="product-price">Rs. 500</div>
+        </div>
         </a>
       </div>
     </div>
