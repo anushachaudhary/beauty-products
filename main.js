@@ -16,12 +16,12 @@
   // List of products to search from
   const products = [
     { name: "Nail Polish", link: "nail.html" },
-    { name: "Foundation", link: "makeup.html" },
+    { name: "Foundation", link: "face.html" },
     { name: "Comb", link: "hair.html" },
-    { name: "Face Wash", link: "makeup.html" },
-    { name: "Sunscreen", link: "makeup.html" },
-    { name: "Vaseline", link: "makeup.html" },
-    { name: "Makeup Brush", link: "makeup.html" },
+    { name: "Face Wash", link: "face.html" },
+    { name: "Sunscreen", link: "face.html" },
+    { name: "Vaseline", link: "skin.html" },
+    { name: "Makeup Brush", link: "face.html" },
     { name: "Nail Polish Set", link: "nail.html" },
   ];
 
