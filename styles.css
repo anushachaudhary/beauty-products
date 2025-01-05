@@ -245,7 +245,41 @@ body {
 .product-price {
   color: #ff4081;
 }
-  
+
+.buy-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.buy {
+  background: #16C47F;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: #fff;
+  cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.add-to-cart {
+  background: #FF9D23;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-left: 10px;
+  color: #fff;
+  cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buy:hover {
+  background: #1ed48b;
+}
+
+.add-to-cart:hover {
+  background: #ffa43c;
+}
   
   footer {
     height: 100px;
