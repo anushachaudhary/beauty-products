@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+  <header>
+    <h1>Shopping Cart</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="cart-container">
+    <h2>Your Cart</h2>
+    <div class="cart-items">
+      <!-- Example product -->
+      <div class="cart-item">
+        <img src="images/home/pic6.jpg" alt="Product Image">
+        <div class="item-details">
+          <p class="item-name">Product Name</p>
+          <p class="item-price">Rs. 500</p>
+        </div>
+        <button class="remove-btn">Remove</button>
+      </div>
+    </div>
+    <div class="cart-summary">
+      <h3>Total: Rs. <span id="cart-total">0</span></h3>
+      <button id="checkout-btn" class="checkout-btn" disabled>Checkout</button>
+    </div>
+  </section>
+
+  <script src="cart.js"></script>
+</body>
+</html>
