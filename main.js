@@ -17,7 +17,7 @@
   const products = [
     { name: "Nail Polish, finger, leg", link: "nail.html" },
     { name: "Foundation, face, cream", link: "face.html" },
-    { name: "Comb, Hair, oil, lotion", link: "hair.html" },
+    { name: "Comb, Hair, oil, lotion, serum, seram", link: "hair.html" },
     { name: "Face Wash", link: "face.html" },
     { name: "Sunscreen", link: "face.html" },
     { name: "Vaseline", link: "skin.html" },
@@ -90,4 +90,29 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loginToggleButton) {
     loginToggleButton.addEventListener("click", toggleLoginStatus);
   }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const signupBtn = document.getElementById('signup-btn');
+  const loginBtn = document.getElementById('login-btn');
+  const logoutBtn = document.getElementById('logout-btn');
+
+  // Check auth status
+  fetch('/auth/auth-status', { credentials: 'include' })
+    .then(res => res.json())
+    .then(data => {
+      if (data.loggedIn) {
+        loginBtn.style.display = 'none';
+        signupBtn.style.display = 'none';
+        logoutBtn.style.display = 'block';
+      } else {
+        logoutBtn.style.display = 'none';
+      }
+    });
+
+  // Logout functionality
+  logoutBtn.addEventListener('click', () => {
+    fetch('/auth/logout', { method: 'POST', credentials: 'include' })
+      .then(() => window.location.reload());
+  });
 });
