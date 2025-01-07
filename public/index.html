@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Product</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Beauty Product</h1>
+
+    <div class="navbar">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="face.html">Face</a></li>
+          <li><a href="hair.html">Hair</a></li>
+          <li><a href="nail.html">Nail</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="search-login">
+      <div class="icon">
+        <input type="text" id="search-bar" placeholder="Search for products...">
+        <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <i class="fa-regular fa-heart"></i>
+        <i class="fa-regular fa-comment"></i>
+      </div>
+      <div class="user-login">
+        <div id="user-name">
+          <p>Checking login status...</p>
+        </div>
+        <div class="signup-btn" id="signup-btn" >
+          <a href="http://127.0.0.1:5503/login">
+            Sign Up
+          </a>
+        </div>
+        <div class="login-btn" id="login-btn">
+          <a href="http://127.0.0.1:5503/login">
+            Login
+          </a>
+        </div>
+        <div class="logout-btn" id="logout-btn" style="display: none;">
+          <a href="http://127.0.0.1:5503/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+    
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h2>New Makeup Artist</h2>
+      <button class="btn">Shopping Now</button>
+    </div>
+    <img src="images/home/pic1.jpg" alt="Eye Shadow">
+  </section>
+
+  <section class="categories">
+    <div class="product-grid">
+      <div class="product">
+        <a href="nail.html">
+        <img src="images/home/pic10.jpg" alt="" height="300" width="300">
+        </a>
+      </div>
+      <div class="product">
+        <a >
+        <img src="images/home/pic11.jpg" alt="" height="300" width="300">
+        </a>
+      </div>
+      <div class="product">
+        <a >
+        <img src="images/home/pic12.jpg" alt="" height="300" width="300">
+        </a>
+      </div>
+      <div class="product">
+        <a >
+        <img src="images/home/pic13.jpg" alt="" height="300" width="300">
+        </a>
+      </div>
+      </div>
+    <h3 class="new-product">New Products</h3>
+    <div class="product-grid">
+      <div class="product">
+        <a >
+        <img src="images/home/pic2.jpg" alt="Nail Polish" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Nail Polish</div>
+          <div class="product-price">Rs. 400</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+        </a>
+      </div>
+      <div class="product">
+        <a >
+        <img src="images/home/pic3.jpg" alt="Foundation" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Foundation</div>
+          <div class="product-price">Rs. 900</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+       
+        </a>
+      </div>
+      <div class="product">
+        <a>
+        <img src="images/home/pic4.jpg" alt="Comb" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Comb</div>
+          <div class="product-price">Rs. 90</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+        
+        </a>
+      </div>
+      <div class="product">
+        <a>
+        <img src="images/home/pic5.jpg" alt="Face Wash" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Face Wash</div>
+          <div class="product-price">Rs. 375</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+        
+        </a>
+      </div>
+      <div class="product">
+        <a>
+        <img src="images/home/pic6.jpg" alt="Sunscreen" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Sunscreen</div>
+          <div class="product-price">Rs. 800</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+       
+        </a>
+      </div>
+      <div class="product">
+        <a >
+        <img src="images/home/pic7.jpg" alt="Vaseline" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Vaseline</div>
+          <div class="product-price">Rs. 120</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+    
+        </a>
+      </div>
+      <div class="product">
+        <a >
+        <img src="images/home/pic8.jpg" alt="Makeup Brush" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Makeup Brush</div>
+          <div class="product-price">Rs. 220</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+
+        </a>
+      </div>
+      <div class="product">
+        <a href="nail.html">
+        <img src="images/home/pic9.jpg" alt="Nail Polish Set" height="300" widht="300">
+        <div class="product-description">
+          <div class="product-name">Nail Polish</div>
+          <div class="product-price">Rs. 500</div>
+        </div>
+        <div class="buy-description">
+          <div class="buy">Buy</div>
+          <div class="add-to-cart">Add to cart</div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>©2025 BeautyProduct. All rights reserved</p>
+    <div class="social-links">
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
+
