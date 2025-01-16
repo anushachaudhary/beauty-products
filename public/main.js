@@ -1,170 +1,270 @@
-// document.getElementById('search-button').addEventListener('click', () => {
-//     const searchQuery = document.getElementById('search-bar').value.toLowerCase();
-//     const products = document.querySelectorAll('.product');
+document.addEventListener('DOMContentLoaded', () => {
+  const cartIcon = document.querySelector('#cart-icon');
+  const signupBtn = document.getElementById('signup-btn');
+  const loginBtn = document.getElementById('login-btn');
+  const logoutBtn = document.getElementById('logout-btn');
+  const userNameDisplay = document.getElementById('user-name');
+  const cartItemsContainer = document.querySelector('.cart-items');
+
+  updateCartQuantity();
   
-//     products.forEach(product => {
-//       const productName = product.getAttribute('data-name');
-//       if (productName.includes(searchQuery)) {
-//         product.style.display = 'block';
-//       } else {
-//         product.style.display = 'none';
-//       }
-//     });
-//   });
-
-
-  // List of products to search from
-  const products = [
-    { name: "Nail Polish, finger, leg", link: "nail.html" },
-    { name: "Foundation, face, cream", link: "face.html" },
-    { name: "Comb, Hair, oil, lotion, serum, seram", link: "hair.html" },
-    { name: "Face Wash", link: "face.html" },
-    { name: "Sunscreen", link: "face.html" },
-    { name: "Vaseline", link: "skin.html" },
-    { name: "Makeup Brush", link: "face.html" },
-    { name: "Nail Polish Set", link: "nail.html" },
-  ];
-
-  // Search function
-  document.getElementById("search-button").addEventListener("click", function () {
-    const searchQuery = document.getElementById("search-bar").value.toLowerCase();
-    const result = products.find(product => product.name.toLowerCase().includes(searchQuery));
-
-    if (result) {
-      window.location.href = result.link; // Redirect to the product page
-    } else {
-      alert("Product not found!");
-    }
-  });
-
-  // Optional: Allow "Enter" key to trigger search
-  document.getElementById("search-bar").addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-      document.getElementById("search-button").click();
-    }
-  });
-
-
- // Check user login status (stored in localStorage for this example)
-function isUserLoggedIn() {
-  return localStorage.getItem("isLoggedIn") === "true";
-}
-
-// Handle button clicks (Add to Cart and Buy)
-function handleButtonClick(event, action) {
-  if (!isUserLoggedIn()) {
-    alert(`You need to log in to ${action}.`);
-    event.preventDefault(); // Prevent any default actions, if applicable
-  } else {
-    alert(`${action} successful!`); // Simulate action success
+  // Check if cart items container exists for cart.html page
+  if (cartItemsContainer) {
+    loadCartItems();
   }
-}
-
-// Update buttons on page load
-function setupButtons() {
-  const addToCartButtons = document.querySelectorAll(".add-to-cart");
-  const buyButtons = document.querySelectorAll(".buy");
-
-  addToCartButtons.forEach((button) => {
-    button.addEventListener("click", (event) => handleButtonClick(event, "add to your cart"));
-  });
-
-  buyButtons.forEach((button) => {
-    button.addEventListener("click", (event) => handleButtonClick(event, "make a purchase"));
-  });
-}
-
-// For demo: toggle login status
-function toggleLoginStatus() {
-  const loggedIn = isUserLoggedIn();
-  localStorage.setItem("isLoggedIn", !loggedIn);
-  alert(`User is now ${!loggedIn ? "logged in" : "logged out"}`);
-}
-
-// Initialize when the page loads
-document.addEventListener("DOMContentLoaded", () => {
-  setupButtons();
-
-  // For demo purposes
-  const loginToggleButton = document.getElementById("toggle-login");
-  if (loginToggleButton) {
-    loginToggleButton.addEventListener("click", toggleLoginStatus);
-  }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const signupBtn = document.getElementById('signup-btn');
-  const loginBtn = document.getElementById('login-btn');
-  const logoutBtn = document.getElementById('logout-btn');
-
-  // Check auth status
-  fetch('/auth/auth-status', { credentials: 'include' })
-    .then(res => res.json())
-    .then(data => {
-      if (data.loggedIn) {
-        loginBtn.style.display = 'none';
-        signupBtn.style.display = 'none';
-        logoutBtn.style.display = 'block';
-      } else {
-        logoutBtn.style.display = 'none';
-      }
-    });
-
-  // Logout functionality
-  logoutBtn.addEventListener('click', () => {
-    fetch('/auth/logout', { method: 'POST', credentials: 'include' })
-      .then(() => window.location.reload());
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const signupBtn = document.getElementById('signup-btn');
-  const loginBtn = document.getElementById('login-btn');
-  const logoutBtn = document.getElementById('logout-btn');
-  const userNameDisplay = document.getElementById('user-name')
-
+  
   // Check user login status when the page loads
-  fetch('/user') // Endpoint to check if the user is authenticated
+  checkUserLoginStatus();
+  
+  // Logout functionality
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleLogout);
+  }
+  
+  // Redirect to login or sign-up page
+  if (signupBtn) {
+    signupBtn.addEventListener('click', () => redirectTo('/login'));
+  }
+  if (loginBtn) {
+    loginBtn.addEventListener('click', () => redirectTo('/login'));
+  }
+  
+  // Cart icon functionality for redirecting to cart page
+  if (cartIcon) {
+    cartIcon.addEventListener('click', () => redirectTo('cart.html'));
+  }
+  
+  // Setup buttons on the homepage (add to cart and buy)
+  if (!cartItemsContainer) {
+    setupButtons();  // Setup Add to Cart and Buy buttons for product pages
+  }
+});
+
+/**
+ * Check user login status and update UI accordingly
+ */
+function checkUserLoginStatus() {
+  fetch('/user') // Mock endpoint for user authentication
     .then(response => response.json())
     .then(user => {
-      
+      const logoutBtn = document.getElementById('logout-btn');
+      const loginBtn = document.getElementById('login-btn');
+      const signupBtn = document.getElementById('signup-btn');
+      const userNameDisplay = document.getElementById('user-name');
+
       if (user && user.name) {
-
-        // User is authenticated, show logout button and hide login/signup
-        logoutBtn.style.display = 'block';
-        loginBtn.style.display = 'none';
-        signupBtn.style.display = 'none';
-
-        // Display the user's name
-        userNameDisplay.textContent = `Welcome, ${user.name}!`;
-        userNameDisplay.style.display = "block";
+        if (logoutBtn) logoutBtn.style.display = 'block';
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (signupBtn) signupBtn.style.display = 'none';
+        if (userNameDisplay) userNameDisplay.textContent = `Welcome, ${user.name}!`;
       } else {
-        // User is not authenticated, show login/signup buttons
-        logoutBtn.style.display = 'none';
-        loginBtn.style.display = 'block';
-        signupBtn.style.display = 'block';
-
-        // Hide the user's name display
-        userNameDisplay.style.display = "none";
+        if (logoutBtn) logoutBtn.style.display = 'none';
+        if (loginBtn) loginBtn.style.display = 'block';
+        if (signupBtn) signupBtn.style.display = 'block';
+        if (userNameDisplay) userNameDisplay.textContent = '';
       }
     });
+}
 
-  // Handle logout functionality
-  logoutBtn.addEventListener('click', () => {
-    fetch('/logout', { method: 'GET', credentials: 'include' }) // Trigger logout
-      .then(() => {
-        // After logout, reload the page and show the login/signup buttons
-        window.location.reload();
-      });
+/**
+ * Logout functionality
+ */
+function handleLogout() {
+  // Clear the cart from localStorage
+  localStorage.removeItem('cart');
+
+  // Logout the user and reload the page
+  fetch('/logout', { method: 'GET', credentials: 'include' })
+    .then(() => {
+      updateCartQuantity(); // Reset cart quantity displayed on the cart icon
+      window.location.reload();
+    });
+}
+
+/**
+ * Setup Add to Cart and Buy button event listeners
+ */
+function setupButtons() {
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+  const buyButtons = document.querySelectorAll('.buy');
+
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', handleAddToCart);
   });
 
-  // Optional: Handle sign-up click (can be linked to Auth0 signup)
-  signupBtn.addEventListener('click', () => {
-    window.location.href = '/login'; // Redirect to login/signup page
+  buyButtons.forEach(button => {
+    button.addEventListener('click', handleBuy);
+  });
+}
+
+/**
+ * Handle Add to Cart functionality
+ */
+function handleAddToCart(event) {
+  fetch('/user')
+    .then(response => response.json())
+    .then(user => {
+      if (!user.name) {
+        alert('You need to log in to add items to your cart.');
+        event.preventDefault();
+        return;
+      }
+
+      const button = event.target;
+      const product = button.closest('.product');
+      if (!product) {
+        alert('Product not found.');
+        return;
+      }
+
+      const productImage = product.querySelector('img').src;
+      const productName = product.querySelector('.product-name').textContent;
+      const productPrice = product.querySelector('.product-price').textContent;
+
+      const cartItem = { image: productImage, name: productName, price: productPrice, quantity: 1 };
+
+      // Get cart from localStorage, or initialize it if it doesn't exist
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Check if the product already exists in the cart
+      const existingItem = cart.find(item => item.name === cartItem.name);
+
+      if (existingItem) {
+        // If item exists, increment the quantity
+        existingItem.quantity++;
+      } else {
+        // If it's a new item, add it to the cart
+        cart.push(cartItem);
+      }
+
+      // Save updated cart back to localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert('Item added to cart!');
+      updateCartQuantity();
+    });
+}
+
+/**
+ * Handle Buy functionality
+ */
+function handleBuy(event) {
+  fetch('/user')
+    .then(response => response.json())
+    .then(user => {
+      if (!user.name) {
+        alert('You need to log in to make a purchase.');
+        event.preventDefault();
+        return;
+      }
+      alert('Purchase successful!');
+      // Add logic for purchasing the product here
+    });
+}
+
+/**
+ * Update the quantity displayed on the cart page and in the cart total
+ */
+function updateCartQuantity() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Update the cart icon quantity display
+  const quantityDisplay = document.querySelector('.quantity');
+  if (quantityDisplay) {
+    quantityDisplay.textContent = totalQuantity; // Set the total quantity
+  }
+}
+
+/**
+ * Create a cart item DOM element
+ * @param {string} image - Product image URL
+ * @param {string} name - Product name
+ * @param {string} price - Product price
+ * @param {number} quantity - Product quantity
+ * @returns {HTMLElement} - Cart item element
+ */
+function createCartItem(image, name, price, quantity) {
+  const cartItem = document.createElement('div');
+  cartItem.classList.add('cart-item');
+  cartItem.innerHTML = `
+    <img src="${image}" alt="Product Image">
+    <div class="item-details">
+      <p class="item-name">${name}</p>
+      <p class="item-price">${price}</p>
+      <div class="quantity">${quantity}</div>
+    </div>
+    <button class="remove-btn">Remove</button>
+  `;
+
+  const removeButton = cartItem.querySelector('.remove-btn');
+  removeButton.addEventListener('click', () => {
+    removeItemFromCart(name);
   });
 
-  // Optional: Handle login click (can be linked to Auth0 login)
-  loginBtn.addEventListener('click', () => {
-    window.location.href = '/login'; // Redirect to login page
+  return cartItem;
+}
+
+/**
+ * Remove item from cart and update localStorage
+ * @param {string} name - The name of the item to remove
+ */
+function removeItemFromCart(name) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Find the item in the cart
+  const itemIndex = cart.findIndex(item => item.name === name);
+
+  if (itemIndex > -1) {
+    // If the item exists, decrease its quantity
+    if (cart[itemIndex].quantity > 1) {
+      cart[itemIndex].quantity--;
+    } else {
+      // If quantity is 1, remove the item from the cart
+      cart.splice(itemIndex, 1);
+    }
+    
+    // Update cart in localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Reload the cart items to reflect changes
+    loadCartItems();
+    updateCartQuantity();
+  }
+}
+
+/**
+ * Load Cart Items from localStorage and display them in cart.html
+ */
+function loadCartItems() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const cartItemsContainer = document.querySelector('.cart-items');
+
+  // Clear existing cart items in the DOM
+  cartItemsContainer.innerHTML = '';
+
+  // Display each item in the cart
+  cart.forEach(item => {
+    const cartItem = createCartItem(item.image, item.name, item.price, item.quantity);
+    cartItemsContainer.appendChild(cartItem);
   });
-});
+
+  // Update cart total
+  updateCartTotal(cart);
+}
+
+/**
+ * Update the cart total price on cart.html
+ */
+function updateCartTotal(cart) {
+  const total = cart.reduce((sum, item) => sum + parseFloat(item.price.replace('Rs. ', '')) * item.quantity, 0);
+  document.getElementById('cart-total').textContent = total;
+}
+
+/**
+ * Redirect to a given URL
+ * @param {string} url - The URL to redirect to
+ */
+function redirectTo(url) {
+  window.location.href = url;
+}
